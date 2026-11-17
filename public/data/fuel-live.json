@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-11-17T00:44:04.575Z",
+  "fetchedAt": "2026-11-17T01:07:26.022Z",
   "dataSource": "live_doe_pdf_and_feeds",
   "prediction": {
     "targetTuesdayDate": "2026-11-17",
@@ -23,14 +23,14 @@
       {
         "factor": "Middle Distillates / Gasoil (ULSD / MOPS Diesel proxy)",
         "impact": "downward",
-        "detail": "5-day gasoil benchmark moved -5.61%, driving local diesel and kerosene adjustments.",
-        "metric": "-5.61% (5D)"
+        "detail": "5-day gasoil benchmark moved -3.64%, driving local diesel and kerosene adjustments.",
+        "metric": "-3.64% (5D)"
       },
       {
         "factor": "Global Brent Crude Supply & Risk Premium",
         "impact": "upward",
-        "detail": "Brent crude spot trades at $92.04/bbl (+1.29% daily).",
-        "metric": "$92.04/bbl"
+        "detail": "Brent crude spot trades at $91.95/bbl (+1.19% daily).",
+        "metric": "$91.95/bbl"
       },
       {
         "factor": "USD / PHP Peso Exchange Rate",
@@ -44,22 +44,22 @@
     "targetTuesdayDate": "2026-11-24",
     "effectiveTime": "06:00 AM PHT",
     "mopsWindowLabel": "11-16 MOPS vs 11-09 wk",
-    "tradingDaysCompleted": 1,
+    "tradingDaysCompleted": 2,
     "tradingDaysTotal": 5,
     "direction": "rollback",
-    "confidence": "early_week",
+    "confidence": "moderate",
     "gasolineDelta": -2.35,
-    "dieselDelta": -4.09,
-    "keroseneDelta": -4.58,
+    "dieselDelta": -3.19,
+    "keroseneDelta": -3.57,
     "headline": "Next Tuesday Reset (2026-11-24) Tracking Another Rollback",
-    "summary": "Current MOPS week vs prior 5-day average projects Gasoline -₱2.35/L, Diesel -₱4.09/L, and Kerosene -₱4.58/L if current futures hold through Friday.",
-    "explanation": "Across 1 of 5 active sessions (2026-11-16 onward), RBOB gasoline trades at $2.493/gal (-5.28% vs last week's $2.632) and ULSD gasoil trades at $3.978/gal (-5.74% vs $4.220), converted at USD/PHP ₱63.94.",
+    "summary": "Current MOPS week vs prior 5-day average projects Gasoline -₱2.35/L, Diesel -₱3.19/L, and Kerosene -₱3.57/L if current futures hold through Friday.",
+    "explanation": "Across 2 of 5 active sessions (2026-11-16 onward), RBOB gasoline trades at $2.493/gal (-5.28% vs last week's $2.632) and ULSD gasoil trades at $4.031/gal (-4.48% vs $4.220), converted at USD/PHP ₱63.94.",
     "rbobPriorAvg": 2.6319,
-    "rbobCurrentAvg": 2.493,
+    "rbobCurrentAvg": 2.4929,
     "rbobDeltaPct": -5.28,
     "ulsdPriorAvg": 4.2204,
-    "ulsdCurrentAvg": 3.9782,
-    "ulsdDeltaPct": -5.74
+    "ulsdCurrentAvg": 4.0313,
+    "ulsdDeltaPct": -4.48
   },
   "prevailing": {
     "areaName": "Metro Manila (DOE NCR)",
@@ -257,10 +257,10 @@
   "benchmarks": {
     "usdPhpRate": 63.936,
     "usdPhpUpdatedAt": "2026-11-17T00:02:31.000Z",
-    "brentUsd": 92.04,
-    "brentChangePct": 1.29,
-    "wtiUsd": 85.28,
-    "wtiChangePct": 0.92,
+    "brentUsd": 91.95,
+    "brentChangePct": 1.19,
+    "wtiUsd": 85.22,
+    "wtiChangePct": 0.85,
     "brentHistory": [
       {
         "date": "2026-08-17",
@@ -520,7 +520,7 @@
       },
       {
         "date": "2026-11-17",
-        "close": 92.04
+        "close": 91.95
       }
     ],
     "wtiHistory": [
@@ -781,8 +781,12 @@
         "close": 88.56
       },
       {
+        "date": "2026-11-16",
+        "close": 85.72
+      },
+      {
         "date": "2026-11-17",
-        "close": 85.28
+        "close": 85.22
       }
     ]
   },
