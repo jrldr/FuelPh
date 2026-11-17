@@ -1,0 +1,6 @@
+{
+  "name": "FuelPh",
+  "description": "Real-time Philippine fuel price monitor, Tuesday pump price forecast & explanation engine, historical trend analyzer, and location-aware station finder.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

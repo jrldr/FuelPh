@@ -1,0 +1,815 @@
+{
+  "fetchedAt": "2026-11-17T00:44:04.575Z",
+  "dataSource": "live_doe_pdf_and_feeds",
+  "prediction": {
+    "targetTuesdayDate": "2026-11-17",
+    "effectiveTime": "06:00 AM PHT",
+    "status": "confirmed_advisory",
+    "direction": "rollback",
+    "confidence": "high",
+    "gasolineDelta": -1.5,
+    "dieselDelta": -3.8,
+    "keroseneDelta": -5.8,
+    "headline": "Pump Price Rollback Effective Tue 2026-11-17",
+    "summary": "Confirmed Philippine oil company advisories implement Gasoline -₱1.50/L, Diesel -₱3.80/L, and Kerosene -₱5.80/L effective Tuesday 06:00 AM PHT.",
+    "explanation": "Latest advisory: \"THERE will be another fuel price rollback on Tuesday, November 17, 2026. The Department of Energy (DOE) said gasoline prices will drop by P1.50 per liter, diesel by P3.80 per liter, and kerosene by P5.80 per liter. FULL STORY: https://www.sunstar.com.ph/ - Facebook\". Philippine oil companies reset pump prices every Tuesday at 06:00 AM using the previous trading week's Mean of Platts Singapore (MOPS) average converted via USD/PHP. Prevailing benchmarks anchor directly to DOE's official retail monitoring report (week ending 2026-11-16).",
+    "drivers": [
+      {
+        "factor": "Refined Gasoline Benchmark (RBOB / MOPS Mogas proxy)",
+        "impact": "downward",
+        "detail": "5-day refined gasoline benchmark shifted -5.96%, guiding MOPS 92/95 RON import parity.",
+        "metric": "-5.96% (5D)"
+      },
+      {
+        "factor": "Middle Distillates / Gasoil (ULSD / MOPS Diesel proxy)",
+        "impact": "downward",
+        "detail": "5-day gasoil benchmark moved -5.61%, driving local diesel and kerosene adjustments.",
+        "metric": "-5.61% (5D)"
+      },
+      {
+        "factor": "Global Brent Crude Supply & Risk Premium",
+        "impact": "upward",
+        "detail": "Brent crude spot trades at $92.04/bbl (+1.29% daily).",
+        "metric": "$92.04/bbl"
+      },
+      {
+        "factor": "USD / PHP Peso Exchange Rate",
+        "impact": "upward",
+        "detail": "With USD/PHP at ₱63.94, peso fluctuations scale landed import fuel costs.",
+        "metric": "₱63.94 / USD"
+      }
+    ]
+  },
+  "nextWeekForecast": {
+    "targetTuesdayDate": "2026-11-24",
+    "effectiveTime": "06:00 AM PHT",
+    "mopsWindowLabel": "11-16 MOPS vs 11-09 wk",
+    "tradingDaysCompleted": 1,
+    "tradingDaysTotal": 5,
+    "direction": "rollback",
+    "confidence": "early_week",
+    "gasolineDelta": -2.35,
+    "dieselDelta": -4.09,
+    "keroseneDelta": -4.58,
+    "headline": "Next Tuesday Reset (2026-11-24) Tracking Another Rollback",
+    "summary": "Current MOPS week vs prior 5-day average projects Gasoline -₱2.35/L, Diesel -₱4.09/L, and Kerosene -₱4.58/L if current futures hold through Friday.",
+    "explanation": "Across 1 of 5 active sessions (2026-11-16 onward), RBOB gasoline trades at $2.493/gal (-5.28% vs last week's $2.632) and ULSD gasoil trades at $3.978/gal (-5.74% vs $4.220), converted at USD/PHP ₱63.94.",
+    "rbobPriorAvg": 2.6319,
+    "rbobCurrentAvg": 2.493,
+    "rbobDeltaPct": -5.28,
+    "ulsdPriorAvg": 4.2204,
+    "ulsdCurrentAvg": 3.9782,
+    "ulsdDeltaPct": -5.74
+  },
+  "prevailing": {
+    "areaName": "Metro Manila (DOE NCR)",
+    "effectiveDate": "2026-11-17",
+    "gasolineCommon": 69.35,
+    "gasolineMin": 63.8,
+    "gasolineMax": 83.5,
+    "ron91Common": 69.35,
+    "ron95Common": 69.6,
+    "ron97Common": 75,
+    "dieselCommon": 86.1,
+    "dieselMin": 80.8,
+    "dieselMax": 90.09,
+    "keroseneCommon": 119.32,
+    "keroseneMin": 104.2,
+    "keroseneMax": 134.44,
+    "regionalAdjustments": [
+      {
+        "region": "Metro Manila (NCR)",
+        "gasolineOffset": 0,
+        "dieselOffset": 0,
+        "note": "Official DOE NCR common price baseline"
+      },
+      {
+        "region": "South Luzon (CALABARZON / Cavite / Bicol)",
+        "gasolineOffset": -1.43,
+        "dieselOffset": -1.45,
+        "note": "Measured median spread vs NCR"
+      },
+      {
+        "region": "North & Central Luzon",
+        "gasolineOffset": 2.74,
+        "dieselOffset": 0.25,
+        "note": "Measured median spread vs NCR"
+      },
+      {
+        "region": "Visayas (Cebu / Iloilo)",
+        "gasolineOffset": 0,
+        "dieselOffset": 0,
+        "note": "Measured median spread vs NCR"
+      },
+      {
+        "region": "Mindanao (Davao / CDO)",
+        "gasolineOffset": 0,
+        "dieselOffset": 0,
+        "note": "Measured median spread vs NCR"
+      }
+    ]
+  },
+  "history": [
+    {
+      "effectiveDate": "2026-08-25",
+      "label": "Aug 25",
+      "gasolineDelta": 0,
+      "dieselDelta": 0,
+      "keroseneDelta": 0,
+      "gasolinePumpAvg": 80.42,
+      "dieselPumpAvg": 93.06,
+      "kerosenePumpAvg": 126.28,
+      "note": "DOE/GasWatch weekly average (Aug 25 – 31)"
+    },
+    {
+      "effectiveDate": "2026-09-01",
+      "label": "Sep 01",
+      "gasolineDelta": -2.49,
+      "dieselDelta": -5.33,
+      "keroseneDelta": -5.86,
+      "gasolinePumpAvg": 77.93,
+      "dieselPumpAvg": 87.73,
+      "kerosenePumpAvg": 120.95,
+      "note": "DOE/GasWatch weekly average (Sep 1 – 7)"
+    },
+    {
+      "effectiveDate": "2026-09-08",
+      "label": "Sep 08",
+      "gasolineDelta": 4.14,
+      "dieselDelta": 5.04,
+      "keroseneDelta": 5.54,
+      "gasolinePumpAvg": 82.07,
+      "dieselPumpAvg": 92.77,
+      "kerosenePumpAvg": 125.99,
+      "note": "DOE/GasWatch weekly average (Sep 8 – 14)"
+    },
+    {
+      "effectiveDate": "2026-09-15",
+      "label": "Sep 15",
+      "gasolineDelta": 5.7,
+      "dieselDelta": 4.34,
+      "keroseneDelta": 4.77,
+      "gasolinePumpAvg": 87.77,
+      "dieselPumpAvg": 97.11,
+      "kerosenePumpAvg": 130.33,
+      "note": "DOE/GasWatch weekly average (Sep 15 – 21)"
+    },
+    {
+      "effectiveDate": "2026-09-22",
+      "label": "Sep 22",
+      "gasolineDelta": 4.82,
+      "dieselDelta": 8.8,
+      "keroseneDelta": 9.68,
+      "gasolinePumpAvg": 92.59,
+      "dieselPumpAvg": 105.91,
+      "kerosenePumpAvg": 139.13,
+      "note": "DOE/GasWatch weekly average (Sep 22 – 28)"
+    },
+    {
+      "effectiveDate": "2026-09-29",
+      "label": "Sep 29",
+      "gasolineDelta": -3.04,
+      "dieselDelta": -9.96,
+      "keroseneDelta": -10.96,
+      "gasolinePumpAvg": 89.55,
+      "dieselPumpAvg": 95.95,
+      "kerosenePumpAvg": 129.17,
+      "note": "DOE/GasWatch weekly average (Sep 29 – Oct 5)"
+    },
+    {
+      "effectiveDate": "2026-10-06",
+      "label": "Oct 06",
+      "gasolineDelta": 1.9,
+      "dieselDelta": -1.3,
+      "keroseneDelta": -1.43,
+      "gasolinePumpAvg": 91.45,
+      "dieselPumpAvg": 94.64,
+      "kerosenePumpAvg": 127.86,
+      "note": "GAS PRICES UP, DIESEL DOWN THIS WEEK Starting Tuesday, gasoline and kero"
+    },
+    {
+      "effectiveDate": "2026-10-13",
+      "label": "Oct 13",
+      "gasolineDelta": 1.56,
+      "dieselDelta": 3.01,
+      "keroseneDelta": -1.77,
+      "gasolinePumpAvg": 92.9,
+      "dieselPumpAvg": 91.65,
+      "kerosenePumpAvg": 124.87,
+      "note": "Motorists will see mixed fuel price adjustments beginning Tuesday, Octob"
+    },
+    {
+      "effectiveDate": "2026-10-20",
+      "label": "Oct 20",
+      "gasolineDelta": -2.6,
+      "dieselDelta": -2.6,
+      "keroseneDelta": -2.86,
+      "gasolinePumpAvg": 88.61,
+      "dieselPumpAvg": 94.29,
+      "kerosenePumpAvg": 127.51,
+      "note": "PH fuel price update: P4.30/L decrease for gas, P2.60/L increase for die"
+    },
+    {
+      "effectiveDate": "2026-10-27",
+      "label": "Oct 27",
+      "gasolineDelta": -0.3,
+      "dieselDelta": -1.2,
+      "keroseneDelta": -1.2,
+      "gasolinePumpAvg": 88.27,
+      "dieselPumpAvg": 95.46,
+      "kerosenePumpAvg": 128.68,
+      "note": "Motorists refuel at a gas station in Paco, Manila. Effective Tuesday (Oc"
+    },
+    {
+      "effectiveDate": "2026-11-03",
+      "label": "Nov 03",
+      "gasolineDelta": -3.5,
+      "dieselDelta": -2,
+      "keroseneDelta": -2.2,
+      "gasolinePumpAvg": 91.77,
+      "dieselPumpAvg": 94.46,
+      "kerosenePumpAvg": 127.68,
+      "note": "Gasoline prices get big hike on November 3, diesel and kerosene roll bac"
+    },
+    {
+      "effectiveDate": "2026-11-10",
+      "label": "Nov 10",
+      "gasolineDelta": -16.8,
+      "dieselDelta": -4.1,
+      "keroseneDelta": -3.7,
+      "gasolinePumpAvg": 70.85,
+      "dieselPumpAvg": 89.9,
+      "kerosenePumpAvg": 123.12,
+      "note": "Boon for motorists: P16.80/L price rollback for gasoline"
+    },
+    {
+      "effectiveDate": "2026-11-17",
+      "label": "Nov 17",
+      "gasolineDelta": -1.5,
+      "dieselDelta": -3.8,
+      "keroseneDelta": -5.8,
+      "gasolinePumpAvg": 69.35,
+      "dieselPumpAvg": 86.1,
+      "kerosenePumpAvg": 117.32,
+      "note": "THERE will be another fuel price rollback on Tuesday, November 17, 2026."
+    }
+  ],
+  "benchmarks": {
+    "usdPhpRate": 63.936,
+    "usdPhpUpdatedAt": "2026-11-17T00:02:31.000Z",
+    "brentUsd": 92.04,
+    "brentChangePct": 1.29,
+    "wtiUsd": 85.28,
+    "wtiChangePct": 0.92,
+    "brentHistory": [
+      {
+        "date": "2026-08-17",
+        "close": 90.87
+      },
+      {
+        "date": "2026-08-18",
+        "close": 91.02
+      },
+      {
+        "date": "2026-08-19",
+        "close": 91.62
+      },
+      {
+        "date": "2026-08-20",
+        "close": 93.78
+      },
+      {
+        "date": "2026-08-21",
+        "close": 94.39
+      },
+      {
+        "date": "2026-08-24",
+        "close": 92.17
+      },
+      {
+        "date": "2026-08-25",
+        "close": 88.58
+      },
+      {
+        "date": "2026-08-26",
+        "close": 87.84
+      },
+      {
+        "date": "2026-08-27",
+        "close": 89.7
+      },
+      {
+        "date": "2026-08-28",
+        "close": 89.31
+      },
+      {
+        "date": "2026-08-31",
+        "close": 90.49
+      },
+      {
+        "date": "2026-09-01",
+        "close": 94.65
+      },
+      {
+        "date": "2026-09-02",
+        "close": 95.63
+      },
+      {
+        "date": "2026-09-03",
+        "close": 95.52
+      },
+      {
+        "date": "2026-09-04",
+        "close": 96.28
+      },
+      {
+        "date": "2026-09-08",
+        "close": 97.92
+      },
+      {
+        "date": "2026-09-09",
+        "close": 101.21
+      },
+      {
+        "date": "2026-09-10",
+        "close": 107.63
+      },
+      {
+        "date": "2026-09-11",
+        "close": 104.61
+      },
+      {
+        "date": "2026-09-14",
+        "close": 105.68
+      },
+      {
+        "date": "2026-09-15",
+        "close": 108.75
+      },
+      {
+        "date": "2026-09-16",
+        "close": 105.83
+      },
+      {
+        "date": "2026-09-17",
+        "close": 104.82
+      },
+      {
+        "date": "2026-09-18",
+        "close": 103.87
+      },
+      {
+        "date": "2026-09-21",
+        "close": 100.34
+      },
+      {
+        "date": "2026-09-22",
+        "close": 99.25
+      },
+      {
+        "date": "2026-09-23",
+        "close": 103.08
+      },
+      {
+        "date": "2026-09-24",
+        "close": 106.6
+      },
+      {
+        "date": "2026-09-25",
+        "close": 104.32
+      },
+      {
+        "date": "2026-09-28",
+        "close": 105.28
+      },
+      {
+        "date": "2026-09-29",
+        "close": 102.59
+      },
+      {
+        "date": "2026-09-30",
+        "close": 103.53
+      },
+      {
+        "date": "2026-10-01",
+        "close": 102.31
+      },
+      {
+        "date": "2026-10-02",
+        "close": 102.25
+      },
+      {
+        "date": "2026-10-05",
+        "close": 100.32
+      },
+      {
+        "date": "2026-10-06",
+        "close": 100.58
+      },
+      {
+        "date": "2026-10-07",
+        "close": 100.2
+      },
+      {
+        "date": "2026-10-08",
+        "close": 104.28
+      },
+      {
+        "date": "2026-10-09",
+        "close": 104.72
+      },
+      {
+        "date": "2026-10-12",
+        "close": 106.65
+      },
+      {
+        "date": "2026-10-13",
+        "close": 105.69
+      },
+      {
+        "date": "2026-10-14",
+        "close": 106.06
+      },
+      {
+        "date": "2026-10-15",
+        "close": 105.92
+      },
+      {
+        "date": "2026-10-16",
+        "close": 109.86
+      },
+      {
+        "date": "2026-10-19",
+        "close": 109.55
+      },
+      {
+        "date": "2026-10-20",
+        "close": 108.79
+      },
+      {
+        "date": "2026-10-21",
+        "close": 108.82
+      },
+      {
+        "date": "2026-10-22",
+        "close": 113.17
+      },
+      {
+        "date": "2026-10-23",
+        "close": 116.72
+      },
+      {
+        "date": "2026-10-26",
+        "close": 115.81
+      },
+      {
+        "date": "2026-10-27",
+        "close": 113.88
+      },
+      {
+        "date": "2026-10-28",
+        "close": 115.32
+      },
+      {
+        "date": "2026-10-29",
+        "close": 114.88
+      },
+      {
+        "date": "2026-10-30",
+        "close": 117.64
+      },
+      {
+        "date": "2026-11-02",
+        "close": 104.77
+      },
+      {
+        "date": "2026-11-03",
+        "close": 103.6
+      },
+      {
+        "date": "2026-11-04",
+        "close": 94.62
+      },
+      {
+        "date": "2026-11-05",
+        "close": 98.29
+      },
+      {
+        "date": "2026-11-06",
+        "close": 98.32
+      },
+      {
+        "date": "2026-11-09",
+        "close": 92.57
+      },
+      {
+        "date": "2026-11-10",
+        "close": 91.49
+      },
+      {
+        "date": "2026-11-11",
+        "close": 92.76
+      },
+      {
+        "date": "2026-11-12",
+        "close": 95.82
+      },
+      {
+        "date": "2026-11-13",
+        "close": 95.84
+      },
+      {
+        "date": "2026-11-17",
+        "close": 92.04
+      }
+    ],
+    "wtiHistory": [
+      {
+        "date": "2026-08-17",
+        "close": 84.5
+      },
+      {
+        "date": "2026-08-18",
+        "close": 84.94
+      },
+      {
+        "date": "2026-08-19",
+        "close": 85.83
+      },
+      {
+        "date": "2026-08-20",
+        "close": 87.83
+      },
+      {
+        "date": "2026-08-21",
+        "close": 87.06
+      },
+      {
+        "date": "2026-08-24",
+        "close": 85.01
+      },
+      {
+        "date": "2026-08-25",
+        "close": 82.36
+      },
+      {
+        "date": "2026-08-26",
+        "close": 82.23
+      },
+      {
+        "date": "2026-08-27",
+        "close": 83.53
+      },
+      {
+        "date": "2026-08-28",
+        "close": 83.4
+      },
+      {
+        "date": "2026-08-31",
+        "close": 85.76
+      },
+      {
+        "date": "2026-09-01",
+        "close": 90.22
+      },
+      {
+        "date": "2026-09-02",
+        "close": 91.01
+      },
+      {
+        "date": "2026-09-03",
+        "close": 91.3
+      },
+      {
+        "date": "2026-09-04",
+        "close": 91.48
+      },
+      {
+        "date": "2026-09-08",
+        "close": 93.03
+      },
+      {
+        "date": "2026-09-09",
+        "close": 96.05
+      },
+      {
+        "date": "2026-09-10",
+        "close": 102.48
+      },
+      {
+        "date": "2026-09-11",
+        "close": 100.05
+      },
+      {
+        "date": "2026-09-14",
+        "close": 101.39
+      },
+      {
+        "date": "2026-09-15",
+        "close": 105.83
+      },
+      {
+        "date": "2026-09-16",
+        "close": 102.43
+      },
+      {
+        "date": "2026-09-17",
+        "close": 101.91
+      },
+      {
+        "date": "2026-09-18",
+        "close": 100.3
+      },
+      {
+        "date": "2026-09-21",
+        "close": 95.78
+      },
+      {
+        "date": "2026-09-22",
+        "close": 94.59
+      },
+      {
+        "date": "2026-09-23",
+        "close": 92.16
+      },
+      {
+        "date": "2026-09-24",
+        "close": 94.61
+      },
+      {
+        "date": "2026-09-25",
+        "close": 92.41
+      },
+      {
+        "date": "2026-09-28",
+        "close": 92.6
+      },
+      {
+        "date": "2026-09-29",
+        "close": 89.38
+      },
+      {
+        "date": "2026-09-30",
+        "close": 90.42
+      },
+      {
+        "date": "2026-10-01",
+        "close": 92.87
+      },
+      {
+        "date": "2026-10-02",
+        "close": 91.11
+      },
+      {
+        "date": "2026-10-05",
+        "close": 89.43
+      },
+      {
+        "date": "2026-10-06",
+        "close": 89.44
+      },
+      {
+        "date": "2026-10-07",
+        "close": 88.28
+      },
+      {
+        "date": "2026-10-08",
+        "close": 91.49
+      },
+      {
+        "date": "2026-10-09",
+        "close": 91.85
+      },
+      {
+        "date": "2026-10-12",
+        "close": 93.74
+      },
+      {
+        "date": "2026-10-13",
+        "close": 94.14
+      },
+      {
+        "date": "2026-10-14",
+        "close": 95.09
+      },
+      {
+        "date": "2026-10-15",
+        "close": 97.97
+      },
+      {
+        "date": "2026-10-16",
+        "close": 101.41
+      },
+      {
+        "date": "2026-10-19",
+        "close": 103.66
+      },
+      {
+        "date": "2026-10-20",
+        "close": 101.79
+      },
+      {
+        "date": "2026-10-21",
+        "close": 97.15
+      },
+      {
+        "date": "2026-10-22",
+        "close": 99.47
+      },
+      {
+        "date": "2026-10-23",
+        "close": 103.27
+      },
+      {
+        "date": "2026-10-26",
+        "close": 101.76
+      },
+      {
+        "date": "2026-10-27",
+        "close": 99.9
+      },
+      {
+        "date": "2026-10-28",
+        "close": 102.78
+      },
+      {
+        "date": "2026-10-29",
+        "close": 102
+      },
+      {
+        "date": "2026-10-30",
+        "close": 104.12
+      },
+      {
+        "date": "2026-11-02",
+        "close": 96.46
+      },
+      {
+        "date": "2026-11-03",
+        "close": 96.09
+      },
+      {
+        "date": "2026-11-04",
+        "close": 88.12
+      },
+      {
+        "date": "2026-11-05",
+        "close": 90.52
+      },
+      {
+        "date": "2026-11-06",
+        "close": 90.83
+      },
+      {
+        "date": "2026-11-09",
+        "close": 86.85
+      },
+      {
+        "date": "2026-11-10",
+        "close": 86.04
+      },
+      {
+        "date": "2026-11-11",
+        "close": 86.53
+      },
+      {
+        "date": "2026-11-12",
+        "close": 88.74
+      },
+      {
+        "date": "2026-11-13",
+        "close": 88.56
+      },
+      {
+        "date": "2026-11-17",
+        "close": 85.28
+      }
+    ]
+  },
+  "sources": [
+    {
+      "title": "Department of Energy (DOE) NCR Retail Pump Prices (through 2026-11-16)",
+      "uri": "https://d24qbtp4vooyzi.cloudfront.net/api/media/file/NCR%20LF%20Price%20Monitoring%2010-16%20Nov%202026.pdf?prefix=dev%2Fmedia"
+    },
+    {
+      "title": "GasWatch PH Live Station Monitor (1,811 stations)",
+      "uri": "https://gaswatchph.com/"
+    },
+    {
+      "title": "OIL PRICE WATCH: Diesel, gasoline extend rollback in third week of November - ABS-CBN",
+      "uri": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOS2p1MWpaQ2h5YjJuQkFqcmdMMGJnamM4QWtjVE9icnU2Z3NlOW92aFFZTGNYWVVTczBsMjhiUC15ZnNEWVdseDEySDFFMmVuM0lSR1B0Z2owNjRwVHYwdnpUTS1uMFAtaWI4YmJMUFk4aC1haVd6YXlFSW91M1JmeVgzYzJxRUU1Qk5DbU9QY1NydjI3el94dA?oc=5"
+    },
+    {
+      "title": "Another fuel price rollback on November 17 Fuel prices will go down again starting Tuesday, November 17, especially diesel and kerosene. Full story: https://www.rappler.com/business/fuel-prices-adjustments-november-17-2026/ - Facebook",
+      "uri": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxQa01Ld0ZXdU5RV3FjYWpQMEFOVVJaTnpGLTl2OEhxV1hVNGxfWWpKQ2ZvVUpjcWhvVWNYbENrSmVsalFLX2M3a1RNUjl2eGFXcUJoNXJ6U2luc3J3OXZTT0FpcDg4d2lJN0RUc1RtOXFFUnUtaVJDQ0NTMVFMQmZ6c0FqclNtLUN4TVRKYUNqQUFTYjVqUDhJdzF5bGd3aTA1bEtNVjIxdmF5anJUOW85Q2J2YmJBNkowNzM2SmRLdDVaU1Y2UTJvVDc2aW9QSnVXU1I0b2tCOFV6cXZq?oc=5"
+    },
+    {
+      "title": "Another oil price rollback set today - Philstar.com",
+      "uri": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNcjZqYUlnZGMwN0tZSUQ0Z0ptNWJDZGdMWk9aRzJkYXBQUGxHZ3UtV1pJWi1tSGttU19hOTRzbTcxQmxQSjlld1FYc0FfZG9naG5uNFY3U1hfSHdnNk9IT1NLZlQ1eUpvd1VHcmlkZXZ3TEhqNU90ZHBfLVAwdjluMTZLYWFiTHVkZTVNMUFPY3Q2Rnhs0gGbAUFVX3lxTFA2ZWc5eTF3WXdxc0F5U1ZuckxwcnNlSnZ0a29EM2ZSWG5aZUpkRHotMXJlNWdwUG5BUXN1RjU0MUNubWlUNHZsRXFYaVJCRHNQUjJZZlZidjBwRlJDYkt1UDZKU1pVenBaaTRWZk1aWW91RHFRMF95elIzUE9FM2d2YjZBNW8yM2ZXRUNrWVVuaFlDUmsydUd6eURz?oc=5"
+    },
+    {
+      "title": "THERE will be another fuel price rollback on Tuesday, November 17, 2026. The Department of Energy (DOE) said gasoline prices will drop by P1.50 per liter, diesel by P3.80 per liter, and kerosene by P5.80 per liter. FULL STORY: https://www.sunstar.com.ph/ - Facebook",
+      "uri": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxQdS1YZU1GOW1wVk14d1FzMWpTT2V2WUkwTWJNOERKbmgxZTBVQkZQcExVZmJVeE5GM1llQnlKdjk0cGdiRmV3YUVpS19GWmVHemlBa2FKdXV1NWtya091N2pieHlJT1gtY3BVQUdBdlNoQjZSZzUtVXdZRngwTWdPS2otN0EyQzdNZ2lUV3VkUUJmMTdWSGI0RVl4T1JYSFVURXkxbkl5cjBxTE5FVUxLMUFFZGpXbmpMTUVYN3RiNmFVZHptTkxyUEdnbno3U2g3SFNQQWJfUU94a0EyVUNZ?oc=5"
+    }
+  ]
+}
