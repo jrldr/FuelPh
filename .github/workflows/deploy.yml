@@ -30,12 +30,7 @@ jobs:
           package-manager-cache: false
 
       - name: Install dependencies
-        run: |
-          if [ -f package-lock.json ]; then
-            npm ci --no-audit --no-fund
-          else
-            npm install --no-audit --no-fund
-          fi
+        run: npm install --no-audit --no-fund
 
       - name: Sync Live DOE & Market Data
         env:
