@@ -1,5 +1,5 @@
-import React, { useMemo, useRef, useState } from 'react';
-import { ArrowDownRight, ArrowUpRight, Check, Download, Upload } from 'lucide-react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { ArrowDownRight, ArrowUpRight, Check, Download, Sparkles, Upload } from 'lucide-react';
 import { getRegionalOffset } from '../services/liveFuelService';
 import type { FuelType, LiveFuelReport, UserSyncedState } from '../types/fuel';
 
@@ -14,6 +14,13 @@ interface SavingsPlannerProps {
   onImportJson: (raw: string) => void;
 }
 
+const VEHICLE_PRESETS = [
+  { label: 'Motorcycle / Scooter', name: 'Motorcycle (3.9L)', tank: 3.9, kmPerL: 50, weeklyKm: 120 },
+  { label: 'Maxi Scooter', name: 'Maxi Scooter (7.1L)', tank: 7.1, kmPerL: 38, weeklyKm: 150 },
+  { label: 'Sedan / Hatch', name: 'Sedan / Hatch (42L)', tank: 42, kmPerL: 13.5, weeklyKm: 180 },
+  { label: 'SUV / Pickup', name: 'SUV / Pickup (75L)', tank: 75, kmPerL: 9.5, weeklyKm: 220 },
+];
+
 export const SavingsPlanner: React.FC<SavingsPlannerProps> = ({
   report,
   syncState,
@@ -24,6 +31,28 @@ export const SavingsPlanner: React.FC<SavingsPlannerProps> = ({
 }) => {
   const [importMessage, setImportMessage] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  // Local string states to allow natural typing (e.g. typing 3.9, backspacing, etc.)
+  const [vehicleNameInput, setVehicleNameInput] = useState<string>(syncState.vehicleName);
+  const [tankLitersInput, setTankLitersInput] = useState<string>(String(syncState.tankLiters));
+  const [weeklyKmInput, setWeeklyKmInput] = useState<string>(String(syncState.weeklyKm));
+  const [kmPerLiterInput, setKmPerLiterInput] = useState<string>(String(syncState.kmPerLiter));
+
+  useEffect(() => {
+    setVehicleNameInput(syncState.vehicleName);
+  }, [syncState.vehicleName]);
+
+  useEffect(() => {
+    setTankLitersInput(String(syncState.tankLiters));
+  }, [syncState.tankLiters]);
+
+  useEffect(() => {
+    setWeeklyKmInput(String(syncState.weeklyKm));
+  }, [syncState.weeklyKm]);
+
+  useEffect(() => {
+    setKmPerLiterInput(String(syncState.kmPerLiter));
+  }, [syncState.kmPerLiter]);
 
   const { prediction, prevailing, nextWeekForecast } = report;
   const activeFuel = syncState.preferredFuel;
@@ -91,6 +120,85 @@ export const SavingsPlanner: React.FC<SavingsPlannerProps> = ({
     reader.readAsText(file);
   };
 
+  const handleVehicleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value;
+    setVehicleNameInput(val);
+    onUpdateProfile({ vehicleName: val });
+  };
+
+  const handleTankChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const valStr = e.target.value;
+    setTankLitersInput(valStr);
+    const val = parseFloat(valStr);
+    if (!isNaN(val) && val > 0 && val <= 500) {
+      onUpdateProfile({ tankLiters: Number(val.toFixed(2)) });
+    }
+  };
+
+  const handleTankBlur = () => {
+    const val = parseFloat(tankLitersInput);
+    if (isNaN(val) || val <= 0) {
+      setTankLitersInput(String(syncState.tankLiters));
+    } else {
+      const clamped = Math.max(0.5, Math.min(500, Number(val.toFixed(2))));
+      setTankLitersInput(String(clamped));
+      onUpdateProfile({ tankLiters: clamped });
+    }
+  };
+
+  const handleWeeklyKmChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const valStr = e.target.value;
+    setWeeklyKmInput(valStr);
+    const val = parseFloat(valStr);
+    if (!isNaN(val) && val >= 0 && val <= 10000) {
+      onUpdateProfile({ weeklyKm: Number(val.toFixed(1)) });
+    }
+  };
+
+  const handleWeeklyKmBlur = () => {
+    const val = parseFloat(weeklyKmInput);
+    if (isNaN(val) || val < 0) {
+      setWeeklyKmInput(String(syncState.weeklyKm));
+    } else {
+      const clamped = Math.max(1, Math.min(10000, Number(val.toFixed(1))));
+      setWeeklyKmInput(String(clamped));
+      onUpdateProfile({ weeklyKm: clamped });
+    }
+  };
+
+  const handleKmPerLiterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const valStr = e.target.value;
+    setKmPerLiterInput(valStr);
+    const val = parseFloat(valStr);
+    if (!isNaN(val) && val > 0 && val <= 150) {
+      onUpdateProfile({ kmPerLiter: Number(val.toFixed(1)) });
+    }
+  };
+
+  const handleKmPerLiterBlur = () => {
+    const val = parseFloat(kmPerLiterInput);
+    if (isNaN(val) || val <= 0) {
+      setKmPerLiterInput(String(syncState.kmPerLiter));
+    } else {
+      const clamped = Math.max(1, Math.min(150, Number(val.toFixed(1))));
+      setKmPerLiterInput(String(clamped));
+      onUpdateProfile({ kmPerLiter: clamped });
+    }
+  };
+
+  const applyPreset = (preset: typeof VEHICLE_PRESETS[number]) => {
+    setVehicleNameInput(preset.name);
+    setTankLitersInput(String(preset.tank));
+    setKmPerLiterInput(String(preset.kmPerL));
+    setWeeklyKmInput(String(preset.weeklyKm));
+    onUpdateProfile({
+      vehicleName: preset.name,
+      tankLiters: preset.tank,
+      kmPerLiter: preset.kmPerL,
+      weeklyKm: preset.weeklyKm,
+    });
+  };
+
   return (
     <section aria-labelledby="planner-heading" className="grid grid-cols-1 gap-6 lg:grid-cols-12">
       {/* Left 7 cols: Vehicle & Tuesday Timing Advisor */}
@@ -150,28 +258,57 @@ export const SavingsPlanner: React.FC<SavingsPlannerProps> = ({
           </p>
         </div>
 
-        {/* Vehicle Profile Inputs */}
-        <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+        {/* Quick Vehicle Presets */}
+        <div className="mt-5">
+          <div className="flex items-center gap-1.5 text-xs font-medium text-slate-500 dark:text-slate-400">
+            <Sparkles className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400" aria-hidden="true" />
+            <span>Quick Presets:</span>
+          </div>
+          <div className="mt-2 flex flex-wrap gap-2">
+            {VEHICLE_PRESETS.map((preset) => {
+              const isMatch = Math.abs(syncState.tankLiters - preset.tank) < 0.1;
+              return (
+                <button
+                  key={preset.label}
+                  type="button"
+                  onClick={() => applyPreset(preset)}
+                  className={`inline-flex min-h-[34px] items-center rounded-lg border px-3 py-1 text-xs font-medium transition-colors ${
+                    isMatch
+                      ? 'border-blue-600 bg-blue-50 text-blue-700 dark:border-blue-500 dark:bg-blue-950/40 dark:text-blue-300'
+                      : 'border-slate-200 bg-slate-50/70 text-slate-700 hover:bg-slate-100 dark:border-slate-700 dark:bg-[#151D2E] dark:text-slate-300 dark:hover:bg-slate-800'
+                  }`}
+                >
+                  <span>{preset.label}</span>
+                  <span className="ml-1.5 font-mono-tabular opacity-75">({preset.tank}L)</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Vehicle Profile Inputs with High-Contrast Dark Mode Styling */}
+        <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div>
             <label
               htmlFor="vehicle-name"
-              className="block text-xs font-medium text-slate-600 dark:text-slate-300"
+              className="block text-xs font-medium text-slate-700 dark:text-slate-300"
             >
               Vehicle Profile Name
             </label>
             <input
               id="vehicle-name"
               type="text"
-              value={syncState.vehicleName}
-              onChange={(e) => onUpdateProfile({ vehicleName: e.target.value })}
-              className="mt-1.5 min-h-[42px] w-full rounded-lg border border-slate-200 bg-slate-50/70 px-3 text-sm text-slate-900 focus:border-blue-600 focus:bg-white focus:outline-none dark:border-slate-700/80 dark:bg-[#151D2E] dark:text-slate-100 dark:focus:border-blue-500"
+              value={vehicleNameInput}
+              onChange={handleVehicleNameChange}
+              placeholder="e.g. Honda Beat 110"
+              className="mt-1.5 min-h-[42px] w-full rounded-lg border border-slate-200 bg-white px-3 text-sm text-slate-900 placeholder:text-slate-400 focus:border-blue-600 focus:bg-white focus:outline-none focus:ring-1 focus:ring-blue-600/30 dark:border-slate-700 dark:bg-[#151D2E] dark:text-white dark:placeholder:text-slate-500 dark:focus:border-blue-500 dark:focus:bg-[#151D2E] dark:focus:ring-blue-500/30"
             />
           </div>
 
           <div>
             <label
               htmlFor="planner-fuel-type"
-              className="block text-xs font-medium text-slate-600 dark:text-slate-300"
+              className="block text-xs font-medium text-slate-700 dark:text-slate-300"
             >
               Fuel Grade
             </label>
@@ -179,72 +316,85 @@ export const SavingsPlanner: React.FC<SavingsPlannerProps> = ({
               id="planner-fuel-type"
               value={activeFuel}
               onChange={(e) => onSelectFuel(e.target.value as FuelType)}
-              className="mt-1.5 min-h-[42px] w-full rounded-lg border border-slate-200 bg-slate-50/70 px-3 text-sm text-slate-900 focus:border-blue-600 focus:bg-white focus:outline-none dark:border-slate-700/80 dark:bg-[#151D2E] dark:text-slate-100 dark:focus:border-blue-500"
+              className="mt-1.5 min-h-[42px] w-full rounded-lg border border-slate-200 bg-white px-3 text-sm text-slate-900 focus:border-blue-600 focus:bg-white focus:outline-none focus:ring-1 focus:ring-blue-600/30 dark:border-slate-700 dark:bg-[#151D2E] dark:text-white dark:focus:border-blue-500 dark:focus:bg-[#151D2E] dark:focus:ring-blue-500/30"
             >
-              <option value="gasoline">Gasoline (₱{localGas.toFixed(2)}/L)</option>
-              <option value="diesel">Diesel (₱{localDiesel.toFixed(2)}/L)</option>
-              <option value="kerosene">Kerosene (₱{localKero.toFixed(2)}/L)</option>
+              <option value="gasoline" className="bg-white text-slate-900 dark:bg-[#151D2E] dark:text-white">
+                Gasoline (₱{localGas.toFixed(2)}/L)
+              </option>
+              <option value="diesel" className="bg-white text-slate-900 dark:bg-[#151D2E] dark:text-white">
+                Diesel (₱{localDiesel.toFixed(2)}/L)
+              </option>
+              <option value="kerosene" className="bg-white text-slate-900 dark:bg-[#151D2E] dark:text-white">
+                Kerosene (₱{localKero.toFixed(2)}/L)
+              </option>
             </select>
           </div>
 
           <div>
-            <label
-              htmlFor="tank-liters"
-              className="block text-xs font-medium text-slate-600 dark:text-slate-300"
-            >
-              Tank Capacity (Liters)
-            </label>
+            <div className="flex items-center justify-between">
+              <label
+                htmlFor="tank-liters"
+                className="block text-xs font-medium text-slate-700 dark:text-slate-300"
+              >
+                Tank Capacity (Liters)
+              </label>
+              <span className="text-[11px] text-slate-400 dark:text-slate-500">
+                Supports motorcycles & cars
+              </span>
+            </div>
             <input
               id="tank-liters"
               type="number"
-              min="5"
-              max="200"
-              value={syncState.tankLiters}
-              onChange={(e) =>
-                onUpdateProfile({ tankLiters: Math.max(5, Number(e.target.value) || 0) })
-              }
-              className="mt-1.5 min-h-[42px] w-full rounded-lg border border-slate-200 bg-slate-50/70 px-3 font-mono-tabular text-sm text-slate-900 focus:border-blue-600 focus:bg-white focus:outline-none dark:border-slate-700/80 dark:bg-[#151D2E] dark:text-slate-100 dark:focus:border-blue-500"
-            />
-          </div>
-
-          <div>
-            <label
-              htmlFor="weekly-km"
-              className="block text-xs font-medium text-slate-600 dark:text-slate-300"
-            >
-              Weekly Distance (km)
-            </label>
-            <input
-              id="weekly-km"
-              type="number"
-              min="10"
-              max="3000"
-              value={syncState.weeklyKm}
-              onChange={(e) =>
-                onUpdateProfile({ weeklyKm: Math.max(10, Number(e.target.value) || 0) })
-              }
-              className="mt-1.5 min-h-[42px] w-full rounded-lg border border-slate-200 bg-slate-50/70 px-3 font-mono-tabular text-sm text-slate-900 focus:border-blue-600 focus:bg-white focus:outline-none dark:border-slate-700/80 dark:bg-[#151D2E] dark:text-slate-100 dark:focus:border-blue-500"
+              step="0.1"
+              min="0.5"
+              max="500"
+              value={tankLitersInput}
+              onChange={handleTankChange}
+              onBlur={handleTankBlur}
+              placeholder="e.g. 3.9"
+              className="mt-1.5 min-h-[42px] w-full rounded-lg border border-slate-200 bg-white px-3 font-mono-tabular text-sm text-slate-900 placeholder:text-slate-400 focus:border-blue-600 focus:bg-white focus:outline-none focus:ring-1 focus:ring-blue-600/30 dark:border-slate-700 dark:bg-[#151D2E] dark:text-white dark:placeholder:text-slate-500 dark:focus:border-blue-500 dark:focus:bg-[#151D2E] dark:focus:ring-blue-500/30"
             />
           </div>
 
           <div>
             <label
               htmlFor="km-per-liter"
-              className="block text-xs font-medium text-slate-600 dark:text-slate-300"
+              className="block text-xs font-medium text-slate-700 dark:text-slate-300"
             >
               Fuel Economy (km/L)
             </label>
             <input
               id="km-per-liter"
               type="number"
-              step="0.5"
-              min="2"
-              max="80"
-              value={syncState.kmPerLiter}
-              onChange={(e) =>
-                onUpdateProfile({ kmPerLiter: Math.max(2, Number(e.target.value) || 1) })
-              }
-              className="mt-1.5 min-h-[42px] w-full rounded-lg border border-slate-200 bg-slate-50/70 px-3 font-mono-tabular text-sm text-slate-900 focus:border-blue-600 focus:bg-white focus:outline-none dark:border-slate-700/80 dark:bg-[#151D2E] dark:text-slate-100 dark:focus:border-blue-500"
+              step="0.1"
+              min="1"
+              max="150"
+              value={kmPerLiterInput}
+              onChange={handleKmPerLiterChange}
+              onBlur={handleKmPerLiterBlur}
+              placeholder="e.g. 45"
+              className="mt-1.5 min-h-[42px] w-full rounded-lg border border-slate-200 bg-white px-3 font-mono-tabular text-sm text-slate-900 placeholder:text-slate-400 focus:border-blue-600 focus:bg-white focus:outline-none focus:ring-1 focus:ring-blue-600/30 dark:border-slate-700 dark:bg-[#151D2E] dark:text-white dark:placeholder:text-slate-500 dark:focus:border-blue-500 dark:focus:bg-[#151D2E] dark:focus:ring-blue-500/30"
+            />
+          </div>
+
+          <div className="sm:col-span-2">
+            <label
+              htmlFor="weekly-km"
+              className="block text-xs font-medium text-slate-700 dark:text-slate-300"
+            >
+              Weekly Distance (km)
+            </label>
+            <input
+              id="weekly-km"
+              type="number"
+              step="1"
+              min="1"
+              max="10000"
+              value={weeklyKmInput}
+              onChange={handleWeeklyKmChange}
+              onBlur={handleWeeklyKmBlur}
+              placeholder="e.g. 120"
+              className="mt-1.5 min-h-[42px] w-full rounded-lg border border-slate-200 bg-white px-3 font-mono-tabular text-sm text-slate-900 placeholder:text-slate-400 focus:border-blue-600 focus:bg-white focus:outline-none focus:ring-1 focus:ring-blue-600/30 dark:border-slate-700 dark:bg-[#151D2E] dark:text-white dark:placeholder:text-slate-500 dark:focus:border-blue-500 dark:focus:bg-[#151D2E] dark:focus:ring-blue-500/30"
             />
           </div>
         </div>
@@ -262,7 +412,7 @@ export const SavingsPlanner: React.FC<SavingsPlannerProps> = ({
                 Weekly consumption
               </dt>
               <dd className="font-mono-tabular text-sm font-semibold text-slate-950 dark:text-white">
-                {weeklyLiters.toFixed(1)} L
+                {weeklyLiters.toFixed(2)} L
               </dd>
             </div>
             <div className="flex items-center justify-between py-3.5">
@@ -270,7 +420,7 @@ export const SavingsPlanner: React.FC<SavingsPlannerProps> = ({
                 Current monthly cost
               </dt>
               <dd className="font-mono-tabular text-sm font-semibold text-slate-950 dark:text-white">
-                ₱{monthlySpendNow.toLocaleString('en-PH', { maximumFractionDigits: 0 })}
+                ₱{monthlySpendNow.toLocaleString('en-PH', { maximumFractionDigits: 2, minimumFractionDigits: 2 })}
               </dd>
             </div>
             <div className="flex items-center justify-between py-3.5">
@@ -278,7 +428,7 @@ export const SavingsPlanner: React.FC<SavingsPlannerProps> = ({
                 Projected post-Tuesday monthly
               </dt>
               <dd className="font-mono-tabular text-sm font-semibold text-slate-950 dark:text-white">
-                ₱{monthlySpendPost.toLocaleString('en-PH', { maximumFractionDigits: 0 })}
+                ₱{monthlySpendPost.toLocaleString('en-PH', { maximumFractionDigits: 2, minimumFractionDigits: 2 })}
               </dd>
             </div>
             <div className="flex items-center justify-between py-3.5">

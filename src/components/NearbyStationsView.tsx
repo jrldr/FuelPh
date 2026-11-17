@@ -619,7 +619,7 @@ export const NearbyStationsView: React.FC<NearbyStationsViewProps> = ({
                   max="200"
                   value={reportGasInput}
                   onChange={(e) => setReportGasInput(e.target.value)}
-                  className="mt-1.5 min-h-[42px] w-full rounded-lg border border-slate-200 bg-slate-50 px-3 font-mono-tabular text-sm text-slate-900 dark:border-slate-700 dark:bg-[#151D2E] dark:text-slate-100"
+                  className="mt-1.5 min-h-[42px] w-full rounded-lg border border-slate-200 bg-white px-3 font-mono-tabular text-sm text-slate-900 focus:border-blue-600 focus:bg-white focus:outline-none focus:ring-1 focus:ring-blue-600/30 dark:border-slate-700 dark:bg-[#151D2E] dark:text-white dark:focus:border-blue-500 dark:focus:bg-[#151D2E] dark:focus:ring-blue-500/30"
                 />
               </div>
 
@@ -638,7 +638,7 @@ export const NearbyStationsView: React.FC<NearbyStationsViewProps> = ({
                   max="200"
                   value={reportDieselInput}
                   onChange={(e) => setReportDieselInput(e.target.value)}
-                  className="mt-1.5 min-h-[42px] w-full rounded-lg border border-slate-200 bg-slate-50 px-3 font-mono-tabular text-sm text-slate-900 dark:border-slate-700 dark:bg-[#151D2E] dark:text-slate-100"
+                  className="mt-1.5 min-h-[42px] w-full rounded-lg border border-slate-200 bg-white px-3 font-mono-tabular text-sm text-slate-900 focus:border-blue-600 focus:bg-white focus:outline-none focus:ring-1 focus:ring-blue-600/30 dark:border-slate-700 dark:bg-[#151D2E] dark:text-white dark:focus:border-blue-500 dark:focus:bg-[#151D2E] dark:focus:ring-blue-500/30"
                 />
               </div>
 
@@ -657,7 +657,7 @@ export const NearbyStationsView: React.FC<NearbyStationsViewProps> = ({
                   max="250"
                   value={reportKeroInput}
                   onChange={(e) => setReportKeroInput(e.target.value)}
-                  className="mt-1.5 min-h-[42px] w-full rounded-lg border border-slate-200 bg-slate-50 px-3 font-mono-tabular text-sm text-slate-900 dark:border-slate-700 dark:bg-[#151D2E] dark:text-slate-100"
+                  className="mt-1.5 min-h-[42px] w-full rounded-lg border border-slate-200 bg-white px-3 font-mono-tabular text-sm text-slate-900 focus:border-blue-600 focus:bg-white focus:outline-none focus:ring-1 focus:ring-blue-600/30 dark:border-slate-700 dark:bg-[#151D2E] dark:text-white dark:focus:border-blue-500 dark:focus:bg-[#151D2E] dark:focus:ring-blue-500/30"
                 />
               </div>
             </div>
