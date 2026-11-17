@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-11-17T01:07:26.022Z",
+  "fetchedAt": "2026-11-17T01:14:25.954Z",
   "dataSource": "live_doe_pdf_and_feeds",
   "prediction": {
     "targetTuesdayDate": "2026-11-17",
@@ -17,20 +17,20 @@
       {
         "factor": "Refined Gasoline Benchmark (RBOB / MOPS Mogas proxy)",
         "impact": "downward",
-        "detail": "5-day refined gasoline benchmark shifted -5.96%, guiding MOPS 92/95 RON import parity.",
-        "metric": "-5.96% (5D)"
+        "detail": "5-day refined gasoline benchmark shifted -5.87%, guiding MOPS 92/95 RON import parity.",
+        "metric": "-5.87% (5D)"
       },
       {
         "factor": "Middle Distillates / Gasoil (ULSD / MOPS Diesel proxy)",
         "impact": "downward",
-        "detail": "5-day gasoil benchmark moved -3.64%, driving local diesel and kerosene adjustments.",
-        "metric": "-3.64% (5D)"
+        "detail": "5-day gasoil benchmark moved -3.62%, driving local diesel and kerosene adjustments.",
+        "metric": "-3.62% (5D)"
       },
       {
         "factor": "Global Brent Crude Supply & Risk Premium",
         "impact": "upward",
-        "detail": "Brent crude spot trades at $91.95/bbl (+1.19% daily).",
-        "metric": "$91.95/bbl"
+        "detail": "Brent crude spot trades at $92.05/bbl (+1.30% daily).",
+        "metric": "$92.05/bbl"
       },
       {
         "factor": "USD / PHP Peso Exchange Rate",
@@ -48,17 +48,17 @@
     "tradingDaysTotal": 5,
     "direction": "rollback",
     "confidence": "moderate",
-    "gasolineDelta": -2.35,
+    "gasolineDelta": -2.31,
     "dieselDelta": -3.19,
     "keroseneDelta": -3.57,
     "headline": "Next Tuesday Reset (2026-11-24) Tracking Another Rollback",
-    "summary": "Current MOPS week vs prior 5-day average projects Gasoline -₱2.35/L, Diesel -₱3.19/L, and Kerosene -₱3.57/L if current futures hold through Friday.",
-    "explanation": "Across 2 of 5 active sessions (2026-11-16 onward), RBOB gasoline trades at $2.493/gal (-5.28% vs last week's $2.632) and ULSD gasoil trades at $4.031/gal (-4.48% vs $4.220), converted at USD/PHP ₱63.94.",
+    "summary": "Current MOPS week vs prior 5-day average projects Gasoline -₱2.31/L, Diesel -₱3.19/L, and Kerosene -₱3.57/L if current futures hold through Friday.",
+    "explanation": "Across 2 of 5 active sessions (2026-11-16 onward), RBOB gasoline trades at $2.495/gal (-5.19% vs last week's $2.632) and ULSD gasoil trades at $4.032/gal (-4.48% vs $4.220), converted at USD/PHP ₱63.94.",
     "rbobPriorAvg": 2.6319,
-    "rbobCurrentAvg": 2.4929,
-    "rbobDeltaPct": -5.28,
+    "rbobCurrentAvg": 2.4953,
+    "rbobDeltaPct": -5.19,
     "ulsdPriorAvg": 4.2204,
-    "ulsdCurrentAvg": 4.0313,
+    "ulsdCurrentAvg": 4.0315,
     "ulsdDeltaPct": -4.48
   },
   "prevailing": {
@@ -240,7 +240,7 @@
       "gasolinePumpAvg": 70.85,
       "dieselPumpAvg": 89.9,
       "kerosenePumpAvg": 123.12,
-      "note": "Boon for motorists: P16.80/L price rollback for gasoline"
+      "note": "THERE will be a big-time oil price rollback on Tuesday, November 10, 202"
     },
     {
       "effectiveDate": "2026-11-17",
@@ -257,10 +257,10 @@
   "benchmarks": {
     "usdPhpRate": 63.936,
     "usdPhpUpdatedAt": "2026-11-17T00:02:31.000Z",
-    "brentUsd": 91.95,
-    "brentChangePct": 1.19,
-    "wtiUsd": 85.22,
-    "wtiChangePct": 0.85,
+    "brentUsd": 92.05,
+    "brentChangePct": 1.3,
+    "wtiUsd": 85.26,
+    "wtiChangePct": 0.9,
     "brentHistory": [
       {
         "date": "2026-08-17",
@@ -520,7 +520,7 @@
       },
       {
         "date": "2026-11-17",
-        "close": 91.95
+        "close": 92.05
       }
     ],
     "wtiHistory": [
@@ -786,7 +786,7 @@
       },
       {
         "date": "2026-11-17",
-        "close": 85.22
+        "close": 85.26
       }
     ]
   },
@@ -814,6 +814,14 @@
     {
       "title": "THERE will be another fuel price rollback on Tuesday, November 17, 2026. The Department of Energy (DOE) said gasoline prices will drop by P1.50 per liter, diesel by P3.80 per liter, and kerosene by P5.80 per liter. FULL STORY: https://www.sunstar.com.ph/ - Facebook",
       "uri": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxQdS1YZU1GOW1wVk14d1FzMWpTT2V2WUkwTWJNOERKbmgxZTBVQkZQcExVZmJVeE5GM1llQnlKdjk0cGdiRmV3YUVpS19GWmVHemlBa2FKdXV1NWtya091N2pieHlJT1gtY3BVQUdBdlNoQjZSZzUtVXdZRngwTWdPS2otN0EyQzdNZ2lUV3VkUUJmMTdWSGI0RVl4T1JYSFVURXkxbkl5cjBxTE5FVUxLMUFFZGpXbmpMTUVYN3RiNmFVZHptTkxyUEdnbno3U2g3SFNQQWJfUU94a0EyVUNZ?oc=5"
+    },
+    {
+      "title": "Another fuel price rollback on November 17 - Rappler",
+      "uri": "https://news.google.com/rss/articles/CBMif0FVX3lxTFBUQm9uZGIwNWV2RkNVaHBvaTFKNXFIQjVQdGdYV0NuWUR4dlFsWHhpOURLNlg4VUlRSzhEN1ZIRmFlYUNlQXB1SW80ZVREMjdrREJORzlHTk9KR2ZfeGROU2dBeUtrT1FuVE5ETklDYzZMcjhPSzV4WDd4aC1QRHc?oc=5"
+    },
+    {
+      "title": "ANOTHER OIL PRICE ROLLBACK⛽📉 Effective Tuesday, November 17, 2026, oil companies will implement a fuel price adjustments in pump prices nationwide. Here are the estimated price decreases per liter: #AllYouNeedToKnow - Facebook",
+      "uri": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxNbDlaeTdvUk5pN0g1Wk9IQkhFTjZnWUhFTmliZkk4RkgxMy0yZ0l0alRZQ1hFU212Y1dCWUgzYUFxOHV4dlVjZFIzX3RYaFBhYVR3c1czYms2bUd1OGlYY3NFV2t0Q2c3dmFQRTN2cDREQk50bjNRTXRrY3pfV1RWbzZ1MkozYVNxdDcwS1h0bXZHa0VmekFmSVpaVWVjTEl5ZUFIUDMyRkFWbXNqWnFTVDQzZ3dscXVrVTdrMUtzX3lia2g5S3VLNnkzYm4ybG9nWWcyV19SME84VDRIQzlN?oc=5"
     }
   ]
 }

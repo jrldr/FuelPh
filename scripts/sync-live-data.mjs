@@ -250,9 +250,22 @@ function parseTuesdayWindowDeltas(items, targetTuesdayIso) {
 }
 
 async function fetchYahooSeries(symbol) {
-  const url = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(symbol)}?interval=1d&range=3mo`;
-  const data = await fetchJson(url);
-  const result = data?.chart?.result?.[0];
+  const hosts = ['query1.finance.yahoo.com', 'query2.finance.yahoo.com'];
+  let data = null;
+  let lastErr = null;
+  for (const host of hosts) {
+    try {
+      const url = `https://${host}/v8/finance/chart/${encodeURIComponent(symbol)}?interval=1d&range=3mo`;
+      data = await fetchJson(url);
+      if (data?.chart?.result?.[0]) break;
+    } catch (err) {
+      lastErr = err;
+    }
+  }
+  if (!data?.chart?.result?.[0]) {
+    throw lastErr || new Error(`No Yahoo Finance data for ${symbol}`);
+  }
+  const result = data.chart.result[0];
   const timestamps = result?.timestamp || [];
   const closes = result?.indicators?.quote?.[0]?.close || [];
   const history = [];
@@ -283,18 +296,65 @@ function classifyGasWatchRegion(area, lat) {
 }
 
 async function main() {
+  const outDir = path.resolve(process.cwd(), 'public', 'data');
+  const fuelFile = path.join(outDir, 'fuel-live.json');
+  const stationsFile = path.join(outDir, 'stations-live.json');
+  let prevReport = null;
+  try {
+    if (fs.existsSync(fuelFile)) {
+      prevReport = JSON.parse(fs.readFileSync(fuelFile, 'utf8'));
+    }
+  } catch {}
+
+  const fallbackYahooFromPrev = (hist, price, changePct) => ({
+    latest: price || hist?.at(-1)?.close || 0,
+    changePct: changePct || 0,
+    weeklyChangePct: 0,
+    history: Array.isArray(hist) ? hist : [],
+  });
+
   const [fx, brent, wti, rbob, ulsd, dataJs, overridesJs, doeNcr, newsMain, newsPump] = await Promise.all([
-    fetchJson('https://open.er-api.com/v6/latest/USD'),
-    fetchYahooSeries('BZ=F'),
-    fetchYahooSeries('CL=F'),
-    fetchYahooSeries('RB=F'),
-    fetchYahooSeries('HO=F'),
-    fetchText('https://gaswatchph.com/js/data.js'),
+    fetchJson('https://open.er-api.com/v6/latest/USD').catch((e) => {
+      console.warn('FX fetch warning:', e.message);
+      return prevReport?.benchmarks?.usdPhpRate ? { rates: { PHP: prevReport.benchmarks.usdPhpRate } } : null;
+    }),
+    fetchYahooSeries('BZ=F').catch((e) => {
+      console.warn('Brent fetch warning:', e.message);
+      return prevReport ? fallbackYahooFromPrev(prevReport.benchmarks?.brentHistory, prevReport.benchmarks?.brentUsd, prevReport.benchmarks?.brentChangePct) : null;
+    }),
+    fetchYahooSeries('CL=F').catch((e) => {
+      console.warn('WTI fetch warning:', e.message);
+      return prevReport ? fallbackYahooFromPrev(prevReport.benchmarks?.wtiHistory, prevReport.benchmarks?.wtiUsd, prevReport.benchmarks?.wtiChangePct) : null;
+    }),
+    fetchYahooSeries('RB=F').catch((e) => {
+      console.warn('RBOB fetch warning:', e.message);
+      return prevReport?.nextWeekForecast
+        ? { latest: prevReport.nextWeekForecast.rbobCurrentAvg, changePct: 0, weeklyChangePct: prevReport.nextWeekForecast.rbobDeltaPct, history: [] }
+        : { latest: 2.5, changePct: 0, weeklyChangePct: 0, history: [] };
+    }),
+    fetchYahooSeries('HO=F').catch((e) => {
+      console.warn('ULSD fetch warning:', e.message);
+      return prevReport?.nextWeekForecast
+        ? { latest: prevReport.nextWeekForecast.ulsdCurrentAvg, changePct: 0, weeklyChangePct: prevReport.nextWeekForecast.ulsdDeltaPct, history: [] }
+        : { latest: 4.0, changePct: 0, weeklyChangePct: 0, history: [] };
+    }),
+    fetchText('https://gaswatchph.com/js/data.js').catch((e) => {
+      console.warn('GasWatch fetch warning:', e.message);
+      return '';
+    }),
     fetchText('https://gaswatchph.com/js/station-overrides.js').catch(() => ''),
     fetchLiveDoeNcrMonitor().catch(() => null),
     fetchGoogleNewsPhFuel('Philippines fuel price rollback OR hike gasoline diesel when:45d').catch(() => []),
     fetchGoogleNewsPhFuel('Philippines DOE Metro Manila pump prices gasoline diesel when:30d').catch(() => []),
   ]);
+
+  if (!dataJs || !brent || !wti) {
+    if (fs.existsSync(fuelFile) && fs.existsSync(stationsFile)) {
+      console.warn('Upstream feeds partially unavailable in CI; preserving existing synced public/data snapshots.');
+      return;
+    }
+    throw new Error('Required live feeds unavailable and no prior snapshot exists.');
+  }
 
   const sandbox = {};
   vm.runInNewContext(`${dataJs}\n${overridesJs}\n;this.__out = { LAST_UPDATED, PRICE_HISTORY, GAS_STATIONS, STATION_OVERRIDES };`, sandbox, { timeout: 2500 });
@@ -548,10 +608,9 @@ async function main() {
     };
   });
 
-  const outDir = path.resolve(process.cwd(), 'public', 'data');
   fs.mkdirSync(outDir, { recursive: true });
-  fs.writeFileSync(path.join(outDir, 'fuel-live.json'), JSON.stringify(report, null, 2));
-  fs.writeFileSync(path.join(outDir, 'stations-live.json'), JSON.stringify({ updatedAt: new Date().toISOString(), stations: compactStations }));
+  fs.writeFileSync(fuelFile, JSON.stringify(report, null, 2));
+  fs.writeFileSync(stationsFile, JSON.stringify({ updatedAt: new Date().toISOString(), stations: compactStations }));
   console.log(`Synced official DOE + GasWatch snapshot (${stations.length} stations) successfully.`);
 }
 
